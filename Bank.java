@@ -58,18 +58,9 @@ predicate BankInv(int n, int m) =
 		if(tmp != null)
 			return tmp.getbalance();
 		else
-			return -1;//TODO: NAO PODE SER -1 (CREDIT LIMIT!!!)
+			return -1337;//TODO: E se a account não existir? O que retornar? (Credit Limit problem)
 
 	}
-
-	/**
-	int setclimit(int acc_code, int cl);
-	int getclimit(int acc_code); // returns -1 if acc_code does not exist
-	int deposit(int acc_code, int val);
-	int widthdraw(int acc_code, int val);
-	boolean transfer(int acc_code_from, int acc_code_to, int val);
-	void removeAccount(int acc_code);
-	 */
 
 	//acc_code > 0
 	//cl > 0
@@ -116,7 +107,7 @@ predicate BankInv(int n, int m) =
 
 		BankAccount tmp = this.findBankAcc(acc_code);
 		if(tmp != null){
-			if(tmp.getbalance()-val > tmp.getclimit()){
+			if((tmp.getbalance()+tmp.getclimit())-val >= 0){
 				tmp.withdraw(val);
 				return val;
 			}
